@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
-import Chat from "./Chat"
+import Chat from "./Chat";
+import TinderCards from "./TinderCards";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 function App() {
@@ -15,12 +16,15 @@ function App() {
                     <Route path="/">
                         {/* Header */}
                         <Header />
+
+                        {/* TinderCards */}
+                        <TinderCards />
                     </Route>
                 </Switch>
 
                 
 
-                {/* TinderCards */}
+                
 
                 {/* Button Below tinder Cards */}
 
