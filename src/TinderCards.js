@@ -1,35 +1,21 @@
 import { SwipeableDrawer } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
 import "./TinderCards.css";
+import database from './firebase';
 
 function TinderCards() {
-    const [people, setPeople] = useState([
-// Push to an array in react
-    // setPeople([...people, 'Hashim', 'yasir])
-
-    {
-        name: "Richard Hendricks",
-        url: "./static/images/richard.jpg"
-    },
-    {
-        name: 'Erlich Bachman',
-        url: './static//images/erlich.jpg'
-      },
-      {
-        name: 'Monica Hall',
-        url: './static/images/monica.jpg'
-      },
-      {
-        name: 'Jared Dunn',
-        url: './static/images/jared.jpg'
-      },
-      {
-        name: 'Dinesh Chugtai',
-        url: './static/images/dinesh.jpg'
-      }
-    ]);
+    const [people, setPeople] = useState([]);
     
+// piece of code which runs based on a condition variable
+useEffect(() => {
+    // this is where the code runs
+    database.collection('people').onSnapshot(snapshot => {
+        setPeople(snapshot.docs.map(doc => doc.data()))
+    })
+    // this will run ones when conponent loads, and never again
+}, [people])
+
     return (
         <div className="tinderCards">
             <div className="tinderCards_card_container">
