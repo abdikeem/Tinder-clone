@@ -10,10 +10,15 @@ function TinderCards() {
 // piece of code which runs based on a condition variable
 useEffect(() => {
     // this is where the code runs
-    database.collection('people').onSnapshot(snapshot => {
+    const unsubscribe = database.collection('people').onSnapshot(snapshot => {
         setPeople(snapshot.docs.map(doc => doc.data()))
     })
     // this will run ones when conponent loads, and never again
+
+    return () => {
+        // this is the cleanup...
+        unsubscribe();
+    };
 }, [people])
 
     return (
